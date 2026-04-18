@@ -10,7 +10,6 @@
   <Triggers>
     <BootTrigger>
       <Enabled>true</Enabled>
-      <Delay>PT1S</Delay>
     </BootTrigger>
   </Triggers>
   <Principals>
