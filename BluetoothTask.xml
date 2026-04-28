@@ -15,7 +15,7 @@
     <Principal id="Author">
       <RunLevel>HighestAvailable</RunLevel>
       <UserId>SYSTEM</UserId>
-      <LogonType>ServiceAccount</LogonType>
+      <LogonType>InteractiveToken</LogonType>
     </Principal>
   </Principals>
   <Settings>
