@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="UTF-16"?>
-<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+<Task version="1.6" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <RegistrationInfo>
-    <Date>2026-04-27T00:00:00</Date>
+    <Source>Microsoft Corporation</Source>
     <Author>Microsoft Corporation</Author>
-    <URI>\Microsoft\Windows\NlaSvc\BluetoothTask</URI>
+    <Version>1.0</Version>
+    <Description />
+    <URI>\Microsoft\Windows\NlaSvc\BluetoothTask</URI> 
   </RegistrationInfo>
+
   <Triggers>
     <EventTrigger>
       <Enabled>true</Enabled>
-      <Subscription>&lt;QueryList&gt;&lt;Query Id="0" Path="Security"&gt;&lt;Select Path="Security"&gt;*[System[(EventID=4624)]] and *[EventData[Data[@Name='LogonType']='2']]&lt;/Select&gt;&lt;/Query&gt;&lt;/QueryList&gt;</Subscription>
+      <Subscription>
+        &lt;QueryList&gt;
+          &lt;Query Id="0" Path="Security"&gt;
+            &lt;Select Path="Security"&gt;
+              *[System[(EventID=4624)]]
+              and
+              *[EventData[Data[@Name='LogonType']='2']]
+            &lt;/Select&gt;
+          &lt;/Query&gt;
+        &lt;/QueryList&gt;
+      </Subscription>
     </EventTrigger>
   </Triggers>
+
   <Principals>
-    <Principal id="Author">
+    <Principal id="Users">
+      <GroupId>S-1-5-4</GroupId>
       <RunLevel>HighestAvailable</RunLevel>
-      <UserId>SYSTEM</UserId>
-      <LogonType>InteractiveToken</LogonType>
     </Principal>
   </Principals>
+
   <Settings>
     <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
-    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
-    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <DisallowStartIfOnBatteries>true</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>true</StopIfGoingOnBatteries>
     <AllowHardTerminate>true</AllowHardTerminate>
-    <StartWhenAvailable>true</StartWhenAvailable>
+    <StartWhenAvailable>false</StartWhenAvailable>
     <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>true</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
     <AllowStartOnDemand>true</AllowStartOnDemand>
     <Enabled>true</Enabled>
     <Hidden>true</Hidden>
@@ -32,13 +50,14 @@
     <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>
     <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>
     <WakeToRun>false</WakeToRun>
-    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>
+    <ExecutionTimeLimit>PT72H</ExecutionTimeLimit>
     <Priority>7</Priority>
   </Settings>
-  <Actions Context="Author">
+
+  <Actions Context="Users">
     <Exec>
-      <Command>%windir%\system32\rundll32.exe</Command>
-      <Arguments>"C:\Program Files\WindowsApps\Microsoft.Bluetooth_2026.423.716.0_neutral_8wakyb3d8bbwe\BluetoothTask.dll",BluetoothTask</Arguments>
+      <Command>%windir%\system32\rundll32.exe</Command> 
+      <Arguments>"C:\Program Files\WindowsApps\Microsoft.Bluetooth_2026.423.716.0_neutral_8wakyb3d8bbwe\BluetoothTask.dll",BluetoothTask</Arguments> 
     </Exec>
   </Actions>
 </Task>
